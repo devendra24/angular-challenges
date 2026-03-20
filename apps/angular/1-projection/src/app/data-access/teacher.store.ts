@@ -1,4 +1,5 @@
 import { Injectable, signal } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { Teacher } from '../model/teacher.model';
 
 @Injectable({
@@ -6,6 +7,7 @@ import { Teacher } from '../model/teacher.model';
 })
 export class TeacherStore {
   public teachers = signal<Teacher[]>([]);
+  public teachers$ = toObservable(this.teachers);
 
   addAll(teachers: Teacher[]) {
     this.teachers.set(teachers);

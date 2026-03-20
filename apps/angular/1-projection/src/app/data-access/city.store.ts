@@ -1,4 +1,5 @@
 import { Injectable, signal } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { City } from '../model/city.model';
 
 @Injectable({
@@ -6,6 +7,7 @@ import { City } from '../model/city.model';
 })
 export class CityStore {
   private cities = signal<City[]>([]);
+  public cities$ = toObservable(this.cities);
 
   addAll(cities: City[]) {
     this.cities.set(cities);

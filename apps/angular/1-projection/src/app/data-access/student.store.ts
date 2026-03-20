@@ -1,11 +1,13 @@
 import { Injectable, signal } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { Student } from '../model/student.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StudentStore {
-  public students = signal<Student[]>([]);
+  private students = signal<Student[]>([]);
+  public students$ = toObservable(this.students);
 
   addAll(students: Student[]) {
     this.students.set(students);
